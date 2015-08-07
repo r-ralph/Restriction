@@ -18,6 +18,7 @@ package jp.mcedu.mincra.restriction.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
@@ -39,12 +40,20 @@ public class RestrictionListener implements Listener {
     }
 
     /**
-     * 天気の変化をなくします(晴れのみに)
+     * 天気の変化をなくす(晴れのみに)
      */
     @EventHandler
     public void onWeatherChange(WeatherChangeEvent event) {
         if (event.toWeatherState()) {
             event.setCancelled(true);
         }
+    }
+
+    /**
+     * ピストンのイベントを無効化
+     */
+    @EventHandler
+    public void onPiston(BlockPistonExtendEvent event) {
+        event.setCancelled(true);
     }
 }
