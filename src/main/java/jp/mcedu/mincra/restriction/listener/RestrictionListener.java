@@ -16,11 +16,10 @@
 
 package jp.mcedu.mincra.restriction.listener;
 
-import net.minecraft.server.v1_8_R3.BlockRedstoneTorch;
-import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class RestrictionListener implements Listener {
     /**
@@ -28,7 +27,7 @@ public class RestrictionListener implements Listener {
      */
     @EventHandler
     public void onRedstone(BlockRedstoneEvent event) {
-        switch (event.getBlock().getType()){
+        switch (event.getBlock().getType()) {
             case REDSTONE_TORCH_OFF:
             case REDSTONE_TORCH_ON:
                 event.setNewCurrent(1);
@@ -36,6 +35,16 @@ public class RestrictionListener implements Listener {
             default:
                 event.setNewCurrent(0);
                 break;
+        }
+    }
+
+    /**
+     * 天気の変化をなくします(晴れのみに)
+     */
+    @EventHandler
+    public void onWeatherChange(WeatherChangeEvent event) {
+        if (event.toWeatherState()) {
+            event.setCancelled(true);
         }
     }
 }
