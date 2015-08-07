@@ -18,8 +18,8 @@ package jp.mcedu.mincra.restriction.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPistonExtendEvent;
-import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.block.*;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class RestrictionListener implements Listener {
@@ -54,6 +54,38 @@ public class RestrictionListener implements Listener {
      */
     @EventHandler
     public void onPiston(BlockPistonExtendEvent event) {
+        event.setCancelled(true);
+    }
+
+    /**
+     * 爆発イベントを無効化
+     */
+    @EventHandler
+    public void onEntityExplode(EntityExplodeEvent event) {
+        event.setCancelled(true);
+    }
+
+    /**
+     * 炎によるブロック消滅を防止
+     */
+    @EventHandler
+    public void onBurn(BlockBurnEvent event) {
+        event.setCancelled(true);
+    }
+
+    /**
+     * 炎の延焼を防止
+     */
+    @EventHandler
+    public void onFireSpread(BlockSpreadEvent event) {
+        event.setCancelled(true);
+    }
+
+    /**
+     * 炎の消滅・氷の融解を防止
+     */
+    @EventHandler
+    public void onBlockFade(BlockFadeEvent event) {
         event.setCancelled(true);
     }
 }
