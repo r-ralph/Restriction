@@ -16,10 +16,13 @@
 
 package jp.mcedu.mincra.restriction;
 
+import jp.mcedu.mincra.restriction.listener.RestrictionListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Restriction extends JavaPlugin {
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new RestrictionListener(), this);
+        getLogger().info("Enabled plugin successfully.");
     }
 }
